@@ -5,6 +5,6 @@
 
 ## Packages
 
-- How to use Shadcn UI (shadcn-svelte): `docs/shadcn-svelte.md`
-- How to use Lucide Icons (@lucide/svelte): `docs/lucide-svelte.md`
-- How to use Svelte Sonner: `docs/svelte-sonner.md`
+- How to use Shadcn UI (shadcn-svelte): `docs/packages/shadcn-svelte.md`
+- How to use Lucide Icons (@lucide/svelte): `docs/packages/lucide-svelte.md`
+- How to use Svelte Sonner: `docs/packages/svelte-sonner.md`
