@@ -1,3 +1,5 @@
+import { json } from "@sveltejs/kit";
+
 export async function GET() {
-  return new Response(JSON.stringify({ status: "ok" }));
+  return json({ status: "ok" });
 }
