@@ -1,8 +1,20 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
-  import { Skull } from "@lucide/svelte";
+  import { Rocket } from "@lucide/svelte";
+  import { toast } from "svelte-sonner";
+
+  function showToast() {
+    toast("Normal!");
+    toast.success("Success!");
+    toast.error("Error!");
+    toast.message("Title", {
+      description: "You can write description like this!",
+    });
+  }
 </script>
 
-<Skull />
+<svelte:head>
+  <title>Home | Svelte 5 Template</title>
+</svelte:head>
 
-<Button>Click me</Button>
+<Button onclick={showToast}><Rocket />Show toast</Button>
