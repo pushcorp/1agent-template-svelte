@@ -3,6 +3,11 @@
 - This is a project template for Svelte 5 (runes), SvelteKit, TypeScript, Tailwind CSS, Shadcn UI (shadcn-svelte), Lucide Icons (@lucide/svelte), Svelte Sonner.
 - This project aims to provide a starting point for building modern web applications using Svelte.
 
+## Database
+
+- uses PostgreSQL via Drizzle ORM
+- Schema: `src/lib/db/schema.ts`
+
 ## Packages
 
 - How to use Shadcn UI (shadcn-svelte): `docs/packages/shadcn-svelte.md`
