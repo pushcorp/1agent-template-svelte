@@ -33,8 +33,6 @@
 
 ## Project Structure
 
-(Update this when adding/removing files or directories)
-
 ```
 src/
 ├── app.html                          # HTML template (lang="ja")
