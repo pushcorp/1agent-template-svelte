@@ -23,8 +23,6 @@ Svelte 5 のテンプレートプロジェクトです。
 - 必要なディレクトリ（src/lib内の components, constants, utils, types, server 等）があらかじめ作成されている
 - API ルート作成済み
 - スラッグを利用したページ作成済み（SSR対応済み）: `src/routes/blog/[id]` を参照
-- VSCode の設定済み（Biome のフォーマッターを使用するetc）
-- Cursor のルール記述済み（CLAUDE.mdからもそのルールを参照させるようにプロンプト記述済みなのでClaude Codeも利用可能）
 
 ## 開発の準備
 
