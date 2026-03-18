@@ -4,10 +4,10 @@
   import { toast } from "svelte-sonner";
 
   function showToast() {
-    toast("Normal!");
-    toast.success("Success!");
-    toast.error("Error!");
-    toast.message("Title", {
+    // toast("Normal!");
+    // toast.success("Success!");
+    // toast.error("Error!");
+    toast.message("Hello, World!", {
       description: "You can write description like this!",
     });
     console.log("Toast shown")
