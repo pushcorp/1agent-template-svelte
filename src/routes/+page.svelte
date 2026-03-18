@@ -10,6 +10,7 @@
     toast.message("Title", {
       description: "You can write description like this!",
     });
+    console.log("Toast shown")
   }
 </script>
 
