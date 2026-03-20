@@ -30,6 +30,10 @@
 | `npm run lint:fix` | Lint and auto-fix |
 | `npm run check:all` | Biome full check (format + lint) |
 | `npm run check:all:fix` | Biome full check with auto-fix |
+| `npm run db:generate` | Generate Drizzle migrations |
+| `npm run db:migrate` | Run Drizzle migrations |
+| `npm run db:push` | Push schema to database |
+| `npm run db:studio` | Open Drizzle Studio |
 
 ## Database
 
@@ -92,7 +96,7 @@ src/
 ## Schema Definitions (Drizzle)
 
 - Define all tables in `src/lib/db/schema.ts`.
-- Use `uuid("id").defaultRandom().primaryKey()` for primary keys.
+- Use `uuid("id").$defaultFn(uuidv7).primaryKey()` for primary keys (UUIDv7 for time-sortable IDs).
 - Column naming: camelCase field name mapping to snake_case SQL column — e.g., `displayName: varchar("display_name", { length: 120 })`.
 
 ## Svelte 5 Runes
