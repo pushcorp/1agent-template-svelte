@@ -2,8 +2,9 @@
   import "../app.css";
   import "../styles.css";
   import { Toaster } from "svelte-sonner";
+  import type { LayoutData } from "./$types";
 
-  let { children } = $props();
+  let { data, children }: { data: LayoutData; children: any } = $props();
 </script>
 
 {@render children()}

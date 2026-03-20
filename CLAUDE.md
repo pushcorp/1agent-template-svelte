@@ -4,12 +4,6 @@
 - Goal: This aims the best vibe-coding starter template/boilerplate. Users can use this to start implementing Landing pages, forms, internal tools, SaaS, or any web apps smoothly.
 - Tech stack: It uses TypeScript, Tailwind CSS, Shadcn UI (shadcn-svelte), Lucide Icons (@lucide/svelte), and Svelte Sonner (svelte-sonner) for basic experience.
 
-## Packages Guide
-
-- How to use Shadcn UI (shadcn-svelte): `docs/packages/shadcn-svelte.md`
-- How to use Lucide Icons (@lucide/svelte): `docs/packages/lucide-svelte.md`
-- How to use Svelte Sonner: `docs/packages/svelte-sonner.md`
-
 ## Prohibited
 
 - Do NOT read/write/edit: .env, .env.*
@@ -45,6 +39,10 @@
 - How to use Shadcn UI (shadcn-svelte): `docs/packages/shadcn-svelte.md`
 - How to use Lucide Icons (@lucide/svelte): `docs/packages/lucide-svelte.md`
 - How to use Svelte Sonner: `docs/packages/svelte-sonner.md`
+
+## Features
+
+- Authentication handling: `docs/features/auth.md`
 
 ## Project Structure
 
