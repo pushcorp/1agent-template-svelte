@@ -1,7 +1,7 @@
 # Project
 
 - Brief: This is the `1agent` template project, built from a Svelte 5 / SvelteKit. `1agent` is the vibe-coding platform.
-- Goal: This aims the best vibe-coding template. Landing pages, forms, internal tools, SaaS, or any web apps.
+- Goal: This aims the best vibe-coding starter template/boilerplate. Users can use this to start implementing Landing pages, forms, internal tools, SaaS, or any web apps smoothly.
 - Tech stack: It uses TypeScript, Tailwind CSS, Shadcn UI (shadcn-svelte), Lucide Icons (@lucide/svelte), and Svelte Sonner (svelte-sonner) for basic experience.
 
 ## Packages Guide
