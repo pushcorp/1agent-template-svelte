@@ -1,5 +1,44 @@
 
+Auth:
+- [ ] better-auth email and password
+- [ ] auth schema (user, session, account, verification tables)
+- [ ] sign-up / sign-in / sign-out pages
+- [ ] auth middleware in hooks.server.ts (protect routes)
+- [ ] add .env.example with AUTH_SECRET, DATABASE_URL
 
+API:
+- [ ] typed fetch helper utility (`$lib/utils/api.ts`)
+- [ ] error response helper (consistent JSON error shape)
+- [ ] example CRUD endpoint (e.g. `/api/v1/posts/+server.ts`)
+
+More shadcn components:
+- [x] Label
+- [x] Textarea
+- [x] Select
+- [x] Checkbox
+- [x] Dialog
+- [x] Card
+- [x] Badge
+- [x] Avatar
+- [x] Dropdown Menu
+- [x] Separator
+
+Shadcn themes and prompt for ai:
+- [ ] add shadcn theme doc/guide (`docs/packages/shadcn-theme.md`)
+- [ ] document how to swap OKLCH color tokens in app.css
+- [ ] add AI prompt reference for generating new themes
+
+Hooks examples:
+- [ ] create `src/hooks.server.ts` with request logging
+- [ ] add CORS headers helper
+- [ ] add rate limiting example (commented)
+- [ ] add auth guard pattern (after better-auth is set up)
+
+Form handling:
+- [ ] install formsnap + sveltekit-superforms
+- [ ] create Zod schema example for a form
+- [ ] build example form page with validation and server action
+- [ ] document form pattern in docs/
 
 PostgreSQL Database:
 - [x] add these scripts packagejson and claude.md
