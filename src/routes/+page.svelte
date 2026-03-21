@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <title>Home | Svelte 5 Template</title>
+  <title>1Agent template</title>
 </svelte:head>
 
 <div class="flex min-h-screen items-center justify-center">
@@ -24,11 +24,8 @@
       <p class="text-lg">Welcome, {data.user.name}!</p>
       <Button onclick={signOut}>Sign out</Button>
     {:else}
-      <p class="text-lg">Welcome to Svelte 5 Template</p>
-      <div class="flex gap-2">
-        <Button href="/login" variant="outline">Sign in</Button>
-        <Button href="/signup">Sign up</Button>
-      </div>
+      <p class="text-lg">Welcome to 1Agent</p>
+      <p class="py-4">あなたが作りたいものをメッセージで送信してください。</p>
     {/if}
   </div>
 </div>
