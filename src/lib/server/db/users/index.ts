@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { user } from "$lib/db/schema";
-import { db } from "$lib/server/db/client";
+import { getDb } from "$lib/server/db/client";
 
 export async function fetchUserById(userId: string) {
   const normalizedUserId = userId.trim();
@@ -9,7 +9,7 @@ export async function fetchUserById(userId: string) {
     throw new Error("Invalid user ID.");
   }
 
-  const [row] = await db.select().from(user).where(eq(user.id, normalizedUserId)).limit(1);
+  const [row] = await getDb().select().from(user).where(eq(user.id, normalizedUserId)).limit(1);
 
   return row ?? null;
 }

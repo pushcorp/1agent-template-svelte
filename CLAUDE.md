@@ -81,6 +81,7 @@ src/
 - Server-only code goes in `$lib/server/`. SvelteKit enforces this boundary.
 - Remove unused/dead code.
 - Use plan mode by default unless the tasks is small, simple one.
+- Do NOT edit any file before user ask
 
 ## Naming
 

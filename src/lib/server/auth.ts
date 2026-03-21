@@ -1,13 +1,14 @@
-import { building } from "$app/environment";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "$lib/server/db/client";
+import { getDb } from "$lib/server/db/client";
 import * as schema from "$lib/db/schema";
 import { uuidv7 } from "uuidv7";
 
+export type Auth = ReturnType<typeof createAuth>;
+
 function createAuth() {
   return betterAuth({
-    database: drizzleAdapter(db, {
+    database: drizzleAdapter(getDb(), {
       provider: "pg",
       schema: {
         user: schema.user,
@@ -46,4 +47,11 @@ function createAuth() {
   });
 }
 
-export const auth = building ? (null as unknown as ReturnType<typeof createAuth>) : createAuth();
+let auth: Auth;
+
+export function getAuth() {
+  if (!auth) {
+    auth = createAuth();
+  }
+  return auth;
+}
