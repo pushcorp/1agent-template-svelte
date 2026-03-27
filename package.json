@@ -49,6 +49,7 @@
     "vite": "^7.0.4"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1018.0",
     "better-auth": "^1.5.5",
     "drizzle-orm": "^0.45.1",
     "postgres": "^3.4.8",

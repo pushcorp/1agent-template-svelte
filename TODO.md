@@ -46,3 +46,6 @@ PostgreSQL Database:
     "db:studio": "drizzle-kit studio"
 - [x] install and use uuidv7 for id `import { uuidv7 } from "uuidv7";`
 - [x] Change schema and drizzle config for PostgreSQL. currently it shows Turso/libSQL code so.
+
+Built-In service
+- [x] Sending email by AWS SES
