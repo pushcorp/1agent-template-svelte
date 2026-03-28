@@ -24,19 +24,8 @@ More shadcn components:
 - [x] Dropdown Menu
 - [x] Separator
 
-Shadcn themes and prompt for ai:
-- [ ] add shadcn theme doc/guide (`docs/packages/shadcn-theme.md`)
-- [ ] document how to swap OKLCH color tokens in app.css
-- [ ] add AI prompt reference for generating new themes
-
 Hooks examples:
 - [x] add auth guard pattern (after better-auth is set up)
-
-Form handling:
-- [ ] install formsnap + sveltekit-superforms
-- [ ] create Zod schema example for a form
-- [ ] build example form page with validation and server action
-- [ ] document form pattern in docs/
 
 PostgreSQL Database:
 - [x] add these scripts packagejson and claude.md
@@ -49,3 +38,13 @@ PostgreSQL Database:
 
 Built-In service
 - [x] Sending email by AWS SES
+
+Shadcn themes and prompt for ai:
+- [ ] add shadcn theme doc/guide (`docs/packages/shadcn-theme.md`)
+- [ ] document how to swap OKLCH color tokens in app.css
+- [ ] add AI prompt reference for generating new themes
+
+Form handling:
+- [ ] create Zod schema example for a form
+- [ ] build example form page with client/server validation
+- [ ] document form pattern in docs/
