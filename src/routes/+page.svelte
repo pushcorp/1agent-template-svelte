@@ -1,3 +1,4 @@
+<!-- Example home page -->
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
   import { invalidateAll } from "$app/navigation";
