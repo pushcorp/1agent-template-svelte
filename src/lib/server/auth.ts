@@ -8,6 +8,7 @@ export type Auth = ReturnType<typeof createAuth>;
 
 function createAuth() {
   return betterAuth({
+    basePath: "/api/v1/auth",
     database: drizzleAdapter(getDb(), {
       provider: "pg",
       schema: {

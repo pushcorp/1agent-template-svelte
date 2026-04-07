@@ -17,7 +17,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.session = null;
   }
 
-  const isProtected = PROTECTED_PREFIXES.some((p) => event.url.pathname.startsWith(p));
+  const isProtected =
+    PROTECTED_PREFIXES.some((p) => event.url.pathname.startsWith(p)) &&
+    !event.url.pathname.startsWith("/api/v1/auth");
   if (isProtected && !event.locals.user) {
     redirect(302, "/login");
   }
