@@ -23,7 +23,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "snapshot:prepare": "bash .devcontainer/scripts/snapshot-prepare.sh"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
