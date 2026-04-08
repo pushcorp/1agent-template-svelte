@@ -31,7 +31,7 @@ This project uses [better-auth](https://www.better-auth.com/) (v1.5.5+) for emai
 Browser                          Server (SvelteKit)                    Database (PostgreSQL)
 ┌──────────────────┐     ┌────────────────────────────────────┐     ┌─────────────────────┐
 │                  │     │                                    │     │                     │
-│  auth-client.ts  │────▶│  /api/auth/[...all]/+server.ts    │────▶│  users              │
+│  auth-client.ts  │────▶│  /api/v1/auth/[...all]/+server.ts │────▶│  users              │
 │  (better-auth    │     │  (catch-all → better-auth handler) │     │  sessions           │
 │   svelte client) │     │                                    │     │  accounts           │
 │                  │     │  hooks.server.ts                   │     │  verifications      │
@@ -70,7 +70,7 @@ Browser                          Server (SvelteKit)                    Database 
 | `src/routes/login/+page.server.ts` | Redirect authenticated users away from login |
 | `src/routes/signup/+page.svelte` | Sign-up page |
 | `src/routes/signup/+page.server.ts` | Redirect authenticated users away from signup |
-| `src/routes/api/auth/[...all]/+server.ts` | Catch-all route delegating to better-auth handler |
+| `src/routes/api/v1/auth/[...all]/+server.ts` | Catch-all route delegating to better-auth handler |
 | `src/routes/+layout.server.ts` | Exposes `locals.user` to all pages via layout data |
 
 ---
@@ -88,6 +88,7 @@ import { uuidv7 } from "uuidv7";
 
 function createAuth() {
   return betterAuth({
+    basePath: "/api/v1/auth",
     database: drizzleAdapter(getDb(), {
       provider: "pg",
       schema: {
@@ -130,6 +131,7 @@ function createAuth() {
 
 Key details:
 
+- **Base path:** Set to `/api/v1/auth` so all auth endpoints live under the versioned API prefix.
 - **Database adapter:** Drizzle with PostgreSQL (`provider: "pg"`), using the four auth tables defined in `schema.ts`.
 - **ID generation:** All IDs (users, sessions, etc.) use UUIDv7 for time-sortable ordering.
 - **Email/password:** Enabled. better-auth handles password hashing (bcrypt) and stores the hash in the `accounts` table.
@@ -149,10 +151,12 @@ Key details:
 ```ts
 import { createAuthClient } from "better-auth/svelte";
 
-export const authClient = createAuthClient();
+export const authClient = createAuthClient({
+  basePath: "/api/v1/auth",
+});
 ```
 
-This creates a Svelte-aware better-auth client that automatically targets `/api/auth/*` endpoints on the same origin. It provides:
+This creates a Svelte-aware better-auth client that targets `/api/v1/auth/*` endpoints on the same origin. It provides:
 
 - `authClient.signUp.email({ email, password, name })` — create a new account
 - `authClient.signIn.email({ email, password })` — authenticate with credentials
@@ -193,9 +197,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.session = null;
   }
 
-  const isProtected = PROTECTED_PREFIXES.some((p) =>
-    event.url.pathname.startsWith(p),
-  );
+  const isProtected =
+    PROTECTED_PREFIXES.some((p) => event.url.pathname.startsWith(p)) &&
+    !event.url.pathname.startsWith("/api/v1/auth");
   if (isProtected && !event.locals.user) {
     redirect(302, "/login");
   }
@@ -221,8 +225,9 @@ const PROTECTED_PREFIXES = ["/app", "/api/v1"];
 ```
 
 - Any request to a URL starting with `/app` or `/api/v1` requires an authenticated session.
+- **Exception:** `/api/v1/auth/*` is excluded from protection so unauthenticated users can reach sign-in/sign-up endpoints.
 - Unauthenticated requests to protected routes receive a **302 redirect to `/login`**.
-- All other routes (including `/`, `/login`, `/signup`, `/api/auth/*`) are public.
+- All other routes (including `/`, `/login`, `/signup`) are public.
 
 **To protect a new route group**, add its prefix to the `PROTECTED_PREFIXES` array.
 
@@ -365,7 +370,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 ## API Route Handler
 
-**File:** `src/routes/api/auth/[...all]/+server.ts`
+**File:** `src/routes/api/v1/auth/[...all]/+server.ts`
 
 ```ts
 import { getAuth } from "$lib/server/auth";
@@ -379,15 +384,15 @@ export const GET = handler;
 export const POST = handler;
 ```
 
-This is a SvelteKit catch-all route that delegates all `/api/auth/*` requests to better-auth's built-in handler. better-auth manages the following endpoints internally:
+This is a SvelteKit catch-all route that delegates all `/api/v1/auth/*` requests to better-auth's built-in handler. better-auth manages the following endpoints internally:
 
 | Endpoint | Method | Purpose |
 |---|---|---|
-| `/api/auth/sign-up/email` | POST | Create account with email/password |
-| `/api/auth/sign-in/email` | POST | Authenticate with email/password |
-| `/api/auth/sign-out` | POST | End the current session |
-| `/api/auth/get-session` | GET | Get the current session |
-| `/api/auth/csrf-token` | GET | Get a CSRF token |
+| `/api/v1/auth/sign-up/email` | POST | Create account with email/password |
+| `/api/v1/auth/sign-in/email` | POST | Authenticate with email/password |
+| `/api/v1/auth/sign-out` | POST | End the current session |
+| `/api/v1/auth/get-session` | GET | Get the current session |
+| `/api/v1/auth/csrf-token` | GET | Get a CSRF token |
 
 ---
 
@@ -534,7 +539,7 @@ better-auth records the client's IP address and user agent in the `sessions` tab
 ```
 1. User fills the signup form (name, email, password)
 2. Auth component calls authClient.signUp.email({ email, password, name })
-3. better-auth client sends POST /api/auth/sign-up/email
+3. better-auth client sends POST /api/v1/auth/sign-up/email
 4. better-auth server:
    a. Validates input
    b. Hashes the password (bcrypt)
@@ -551,7 +556,7 @@ better-auth records the client's IP address and user agent in the `sessions` tab
 ```
 1. User fills the signin form (email, password)
 2. Auth component calls authClient.signIn.email({ email, password })
-3. better-auth client sends POST /api/auth/sign-in/email
+3. better-auth client sends POST /api/v1/auth/sign-in/email
 4. better-auth server:
    a. Looks up the account by email + provider
    b. Verifies the password against the stored hash
@@ -566,7 +571,7 @@ better-auth records the client's IP address and user agent in the `sessions` tab
 ```
 1. User clicks the "Sign out" button
 2. Page calls authClient.signOut()
-3. better-auth client sends POST /api/auth/sign-out
+3. better-auth client sends POST /api/v1/auth/sign-out
 4. better-auth server:
    a. Invalidates the session in the `sessions` table
    b. Clears the session cookie
